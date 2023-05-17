@@ -9,14 +9,6 @@ fn cut(remain_length:i32, cut_length:i32) -> i32 {
     return remain_length - (cut_length + cut_waste);
 }
 
-fn print_array(array:Vec<i32>) {
-    for i in 0..array.len() {
-        print!("{} ", array[i]);
-    }
-
-    print!("\n");
-}
-
 fn min_element(array:Vec<i32>) -> i32 {
     let mut min:i32 = array[0];
     for i in 0..array.len() {
@@ -67,22 +59,23 @@ fn main() {
     */
 
     let mut count:i32 = 0;
-    let mut flag:bool = false; // true = even, false = odd
-    let mut parsed_nums:Vec<i32> = Vec::new();
-    for i in &v {
-        if flag {
-            count = i.parse::<i32>().unwrap();
-            flag = false;
-        } else {
-            for j in 0..count {
-                parsed_nums.push(i.parse::<i32>().unwrap());
-            }
-            flag = true;
-        }
-    }
 
     // sort
     nums.sort();
+
+    // output information of input data
+    output_file.write(b"There are ").expect("write failed.");
+    output_file.write(nums.len().to_string().as_bytes()).expect("write failed.");
+    output_file.write(b" datas.\n\n").expect("write failed.");
+
+    output_file.write(b"There are all of the data content:\n").expect("write failed.");
+
+    for i in nums.clone() {
+        output_file.write(i.to_string().as_bytes()).expect("write failed.");
+        output_file.write(b" ").expect("write failed.");
+    }
+
+    output_file.write(b"\n").expect("write failed.");
 
     // debug output sorted vector
     /*
@@ -120,19 +113,27 @@ fn main() {
             }
         }
 
-        println!("This time waste {} mm of aluninum.", remain_length);
+        output_file.write(b"\nThis time waste ").expect("write failed");
+        output_file.write(remain_length.to_string().as_bytes()).expect("write failed");
+        output_file.write(b" mm of aluninum.\n").expect("write failed");
         waste += remain_length;
         aluminum += 1;
-        print!("ans = ");
-        print_array(ans);
-        println!("");
+        output_file.write(b"ans = ").expect("write failed");
+        for i in 0..ans.len() {
+            output_file.write(ans[i].to_string().as_bytes()).expect("write failed");
+            output_file.write(b" ").expect("write failed");
+        }
+
+        output_file.write(b"\n").expect("write failed");
         if index == 0 {
             break;
         }
     }
 
-    println!("Need to use {} *5800mm aluminum materials.", aluminum);
-    // println!("Wasted mm of aluminum.", waste);
-
-    output_file.write(b"hi").expect("write failed");
+    output_file.write(b"\nNeed to use ").expect("write failed");
+    output_file.write(aluminum.to_string().as_bytes()).expect("write failed");
+    output_file.write(b" * 5800mm aluminum materials.\n").expect("write failed");
+    output_file.write(b"Wasted ").expect("write failed.");
+    output_file.write(waste.to_string().as_bytes()).expect("write failed.");
+    output_file.write(b" mm of aluminum.").expect("write failed.");
 }

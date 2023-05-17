@@ -1,1 +1,34 @@
-hi
+There are 55 datas.
+
+There are all of the data content:
+437 437 437 437 446 446 446 446 471 471 530 530 595 595 613 613 635 635 635 635 635 635 672 672 715 715 750 750 771 771 771 771 798 798 1007 1007 1038 1038 1241 1241 1247 1247 1247 1247 1247 1247 1442 1442 1832 1832 1905 1905 1905 2023 2023 
+
+This time waste 306 mm of aluninum.
+ans = 2023 2023 1442 
+
+This time waste 79 mm of aluninum.
+ans = 1905 1905 1905 
+
+This time waste 14 mm of aluninum.
+ans = 1832 1832 1442 672 
+
+This time waste 4 mm of aluninum.
+ans = 1247 1247 1247 1247 798 
+
+This time waste 16 mm of aluninum.
+ans = 1247 1247 1241 1241 798 
+
+This time waste 156 mm of aluninum.
+ans = 1038 1038 1007 1007 771 771 
+
+This time waste 5 mm of aluninum.
+ans = 771 771 750 750 715 715 672 635 
+
+This time waste 191 mm of aluninum.
+ans = 635 635 635 635 635 613 613 595 595 
+
+This time waste 242 mm of aluninum.
+ans = 530 530 471 471 446 446 446 446 437 437 437 437 
+
+Need to use 9 * 5800mm aluminum materials.
+Wasted 1013 mm of aluminum.
