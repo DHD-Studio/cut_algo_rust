@@ -5,25 +5,10 @@ use std::fs::File;
 const UNIT_LENGTH:i32 = 5800;
 const CUT_WASTE:i32 = 2;
 
-fn cut(remain_length:i32, cut_length:i32) -> i32 {
-    return remain_length - (cut_length + CUT_WASTE);
-}
-
-fn min_element(array:Vec<i32>) -> i32 {
-    let mut min:i32 = array[0];
-    for i in 0..array.len() {
-        if array[i] < min {
-            min = array[i];
-        }
-    }
-
-    return min;
-}
 
 fn main() {
-    // get input
-    let mut input_file = File::open("input.txt").expect("file not found");
-    let mut content:String = String::new();
+    let mut input_file = File::open("input.txt").expect("File not found");
+    let mut content = String::new();
     input_file.read_to_string(&mut content).expect("something went wrong reading the file");
 
     // set output file
@@ -56,51 +41,12 @@ fn main() {
     output_file.write(b"\n").expect("write failed.");
 
     // calculate
-    let mut index = nums.len().try_into().unwrap();
-    index -= 1;
+    let mut waste = 0;
+    let mut aluminum = 0;
 
-    let mut aluminum:i32 = 0;
-    let mut waste:i32 = 0;
-    loop {
-        let mut remain_length = UNIT_LENGTH;
-        let mut ans:Vec<i32> = Vec::new();
+    let mut aluminum_list:Vec<i32> = vec![];
 
-        while remain_length >= min_element(nums.clone()) + CUT_WASTE {
-            index = nums.len() - 1;
-            while index > 0 && nums[index] > remain_length + CUT_WASTE {
-                index -= 1;
-            }
-
-            if index > 0 {
-                remain_length = cut(remain_length, nums[index]);
-                ans.push(nums[index]);
-                nums.remove(index);
-            } else if index == 0 {
-                remain_length = cut(remain_length, nums[index]);
-                ans.push(nums[index]);
-                break;
-            } else {
-                break;
-            }
-        }
-
-        output_file.write(b"\nThis time waste ").expect("write failed");
-        output_file.write(remain_length.to_string().as_bytes()).expect("write failed");
-        output_file.write(b" mm of aluninum.\n").expect("write failed");
-        waste += remain_length;
-        aluminum += 1;
-        output_file.write(b"ans = ").expect("write failed");
-        for i in 0..ans.len() {
-            output_file.write(ans[i].to_string().as_bytes()).expect("write failed");
-            output_file.write(b" ").expect("write failed");
-        }
-
-        output_file.write(b"\n").expect("write failed");
-        if index == 0 {
-            break;
-        }
-    }
-
+    // output result
     output_file.write(b"\nNeed to use ").expect("write failed");
     output_file.write(aluminum.to_string().as_bytes()).expect("write failed");
     output_file.write(b" * 5800mm aluminum materials.\n").expect("write failed");
